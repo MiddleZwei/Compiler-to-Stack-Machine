@@ -16,7 +16,7 @@
 %%
 
 "read"      {           return READ;            }
-"begin"     {           return _BEGIN;          }
+"begin"     {           return _BEGIN;           }
 "end"       {           return END;             }
 "print"     {           return PRINT;           }
 "exit"      {           return EXIT;            }

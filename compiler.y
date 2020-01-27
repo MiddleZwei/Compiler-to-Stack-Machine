@@ -153,8 +153,8 @@ void count_ident(string ident_name){
 
 void data(){
     cout << "# variables ";
-    auto pos = vars.cend();
-    for (auto it = pos; it != vars.cbegin(); it--){
+    auto pos = vars.cbegin();
+    for (auto it = pos; it != vars.cend(); it++){
         cout << *it;
         cout << " and ";
     }
@@ -164,8 +164,8 @@ void data(){
     const char msg[] = "DATA ";
     // command(msg);
     cout << msg;
-    auto pos2 = vars.cend();
-    for (auto it = pos2; it != vars.cbegin(); it--){
+    auto pos2 = vars.cbegin();
+    for (auto it = pos2; it != vars.cend(); it++){
         cout << 0 << " ";
     }
 }
