@@ -132,14 +132,6 @@ assign_stat : IDENT ASSIGN num_expr                             { cout << "assig
 
 /* Additional C code */
 
-int main(int argc, char *argv[]) {
-    yydebug = 0;
-    yyin = stdin;
-    yyparse();
-
-    return 0;
-}
-
 void command(const char * msg){
     cout << linenum << "     " << msg;
     linenum++;
@@ -150,17 +142,19 @@ void comment(const char * cmd, bool start){
     } else {
         cout << "# " << cmd << " ends here";
     }
-
 }
+
 void count_ident(string ident_name){
     vars.insert(ident_name);
 }
 
 
+
+
 void data(){
     cout << "# variables ";
-    auto pos = vars.cbegin();
-    for (auto it = pos; it != vars.cend(); it++){
+    auto pos = vars.cend();
+    for (auto it = pos; it != vars.cbegin(); it--){
         cout << *it;
         cout << " and ";
     }
@@ -170,11 +164,13 @@ void data(){
     const char msg[] = "DATA ";
     // command(msg);
     cout << msg;
-    auto pos2 = vars.cbegin();
-    for (auto it = pos2; it != vars.cend(); it++){
+    auto pos2 = vars.cend();
+    for (auto it = pos2; it != vars.cbegin(); it--){
         cout << 0 << " ";
     }
 }
+
+
 
 void read(string id){
     const char msg[] = "READ";
@@ -184,6 +180,8 @@ void read(string id){
     pop_adr();
 }
 
+
+
 void pop_adr(){
     const char msg[] = "POP ";
     command(msg);
@@ -191,6 +189,17 @@ void pop_adr(){
     cout << endl;
 }
 
+
+
+
+
+int main(int argc, char *argv[]) {
+    yydebug = 0;
+    yyin = stdin;
+    yyparse();
+
+    return 0;
+}
 
 void yyerror (const char *msg) {
     fprintf(stderr, "Parse error: %s\n", msg);

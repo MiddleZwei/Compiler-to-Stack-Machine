@@ -1,66 +1,34 @@
-/* Definitions */
-
-
 %{
-        /* C code to be copied verbatim */
-// #include <stdio.h>
-#include <iostream>
-#include <stdlib.h>
-#include "compiler.tab.h"
-#define YY_DECL int yylex()
-
+#include <string>
+#include "node.h"
+#include "parser.hpp"
+#define SAVE_TOKEN yylval.string = new std::string(yytext, yyleng)
+#define TOKEN(t) (yylval.token = t)
+extern "C" int yywrap() { }
 %}
 
-/* %option noyywrap */
+%%
+
+"int"		return INT;
+"long"		return LONG;
+"signed"	return SIGNED;
+"long"		return LONG;
+
+"while"	return WHILE;
+"if"	return IF;
+
+"and"	return AND;
+"or"	return OR;
+"not"	return NOT;
+"then"	return THEN;
+"else"	return ELSE;
+
+"do"	return DO;
+"print"	return PRINT;
+"read"	return READ;
+"begin"	return BEGIN;
+"end"	return END;
+"exit"	return EXIT;
 
 %%
 
-"read"      {           return READ;            }
-"begin"     {           return _BEGIN;          }
-"end"       {           return END;             }
-"print"     {           return PRINT;           }
-"exit"      {           return EXIT;            }
-"if"        {           return IF;              }
-"then"      {           return THEN;            }
-"else"      {           return ELSE;            }
-"while"     {           return WHILE;           }
-"do"        {           return DO;              }
-
-"and"       {           return AND;             }
-"or"        {           return OR;              }
-"not"       {           return NOT;             }
-
-"="         {           return EQUAL;           }
-"<"         {           return SMALLER;         }
-">"         {           return GREATER;         }
-"<="        {           return SMALLEREQ;       }
-">="        {           return GREATEREQ;       }
-"<>"        {           return NOTEQUAL;        }
-"true"      {           return TRUE;            }
-"false"     {           return FALSE;           }
-"("         {           return LEFT;            }
-")"         {           return RIGHT;           }
-
-        
-[-]?[0-9]+  {           yylval.num = atoi(yytext); return NUM;}
-[a-zA-Z][a-zA-Z0-9]* {  yylval.n=strdup(yytext); return IDENT;}
-":="        {           return ASSIGN;          }
-"#".*       {           /* DO NOTHING */        }
-";"         {           return SEMICOLON;       }
-
-"+"         {           return PLUS;            }
-"-"         {           return MINUS;           }
-"*"         {           return MUL;             }
-"/"         {           return DIV;             }
-"%"         {           return MOD;             }
-
-
-
-%%
-
-/* User code */
-
-int yywrap(void){
-    printf("EOF\n");
-    return 1;
-}
