@@ -34,7 +34,7 @@
 "<"         {           return SMALLER;         }
 ">"         {           return GREATER;         }
 "<="        {           return SMALLEREQ;       }
-">="        {           return GREATEREQ;       }
+">="        {           yylval.n=strdup(yytext); return GREATEREQ;       }
 "<>"        {           return NOTEQUAL;        }
 "true"      {           return TRUE;            }
 "false"     {           return FALSE;           }

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm compiler.tab.h compiler.tab.c lex.yy.c
+rm compiler compiler.tab.h compiler.tab.c lex.yy.c
 
 bison -d compiler.y
 

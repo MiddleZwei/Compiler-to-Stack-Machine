@@ -5,6 +5,6 @@ if i>=0 then begin
         j:=j * i;
         i:=i - 1;
     end;
-    print j;
+    print j+i;
 end;
 
